@@ -13,7 +13,7 @@ export default function App() {
   };
 
   const generateQuery = async () => {
-    const response = await fetch("http://localhost:3002/generate", {
+    const response = await fetch("https://sql-gen-ai-powered.onrender.com/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
