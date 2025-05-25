@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(express.json()); 
@@ -30,3 +32,12 @@ app.post("/generate", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+// Serve static files from the Vite build (client/dist) after API routes
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, "../client/dist")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+);
